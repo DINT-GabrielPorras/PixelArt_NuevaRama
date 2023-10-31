@@ -17,7 +17,7 @@
             <EventSetter Event="Checked" Handler="SeleccionaColor"/>
         </Style>
         <Style TargetType="{x:Type Border}" x:Key="bdRejilla">
-            <!--<EventSetter Event="MouseLeftButtonDown"  Handler="celda_MouseLeftButton"/>-->
+            <EventSetter Event="MouseLeftButtonDown"  Handler="celda_MouseLeftButtonDown"/>
             <EventSetter Event="MouseEnter" Handler="celda_Enter"/>
         </Style>
     </Window.Resources>
@@ -52,7 +52,7 @@
         </StackPanel>
 
         <Border BorderBrush="Black" BorderThickness="3">
-            <UniformGrid x:Name="rejilla" MouseEnter="" Margin="0,-3,0,-3">
+            <UniformGrid x:Name="rejilla" Margin="0,-3,0,-3">
                 
             </UniformGrid>
         </Border>
