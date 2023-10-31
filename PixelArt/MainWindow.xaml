@@ -14,6 +14,11 @@
         </Style>
         <Style TargetType="{x:Type RadioButton}">
             <Setter Property="Margin" Value="3"/>
+            <EventSetter Event="Checked" Handler="SeleccionaColor"/>
+        </Style>
+        <Style TargetType="{x:Type Border}" x:Key="bdRejilla">
+            <!--<EventSetter Event="MouseLeftButtonDown"  Handler="celda_MouseLeftButton"/>-->
+            <EventSetter Event="MouseEnter" Handler="celda_Enter"/>
         </Style>
     </Window.Resources>
     
@@ -31,15 +36,15 @@
         <StackPanel DockPanel.Dock="Right" Margin="20">
             <GroupBox Header="Colores" Padding="0,10">
                 <StackPanel>
-                    <RadioButton Content="Negro"/>
-                    <RadioButton Content="Blanco"/>
-                    <RadioButton Content="Rojo"/>
-                    <RadioButton Content="Verde"/>
-                    <RadioButton Content="Azul"/>
-                    <RadioButton Content="Amarillo"/>
-                    <RadioButton Content="Naranja"/>
-                    <RadioButton Content="Rosa"/>
-                    <RadioButton Content="Personalizado"/>
+                    <RadioButton Content="Negro" Tag="Black"/>
+                    <RadioButton Content="Blanco" Tag="White"/>
+                    <RadioButton Content="Rojo" Tag="Red"/>
+                    <RadioButton Content="Verde" Tag="Green"/>
+                    <RadioButton Content="Azul" Tag="Blue"/>
+                    <RadioButton Content="Amarillo" Tag="Yellow"/>
+                    <RadioButton Content="Naranja" Tag="Orange"/>
+                    <RadioButton Content="Rosa" Tag="Pink"/>
+                    <RadioButton Content="Personalizado" Tag="Personalized"/>
                     <TextBox Text="" Margin="3"/>
                 </StackPanel>
             </GroupBox>
@@ -47,7 +52,7 @@
         </StackPanel>
 
         <Border BorderBrush="Black" BorderThickness="3">
-            <UniformGrid x:Name="rejilla">
+            <UniformGrid x:Name="rejilla" MouseEnter="" Margin="0,-3,0,-3">
                 
             </UniformGrid>
         </Border>

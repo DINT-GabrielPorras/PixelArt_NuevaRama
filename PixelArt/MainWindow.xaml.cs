@@ -21,9 +21,10 @@ namespace PixelArt
     /// </summary>
     public partial class MainWindow : Window
     {
+        Brush colorSeleccionado = Brushes.White;
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();       
         }
 
         public void EstableceTamañoRejilla(int dimension)
@@ -37,9 +38,29 @@ namespace PixelArt
                     Border bd = new Border();
                     bd.BorderBrush = Brushes.Gray;
                     bd.BorderThickness = new Thickness(1);
+                    bd.Style = (Style)this.Resources["bdRejilla"]; 
+                    //bd.MouseLeftButtonDown += new MouseButtonEventHandler(celda_MouseLeftButton);
+                    //bd.MouseEnter += new MouseEventHandler(celda_Enter);
+
                     rejilla.Children.Add(bd);
                 }
             }
+        }
+
+        /*
+        private void celda_MouseLeftButton(object sender, MouseButtonEventArgs e)
+        {
+            ((Border)sender).Background = colorSeleccionado;
+        }
+        */
+
+        private void celda_Enter (object sender, EventArgs e)
+        {
+            (sender as Border).Background = Brushes.Red;
+        }
+        private void Bd_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -55,6 +76,17 @@ namespace PixelArt
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             EstableceTamañoRejilla(75);
+        }
+
+        private void SeleccionaColor(object sender, RoutedEventArgs e)
+        {
+            /*
+            String color = (sender as RadioButton).Tag.ToString();
+            BrushConverter c1 = new BrushConverter();
+
+            colorSeleccionado = (Brush)c1.ConvertFrom(color);
+            */
+            colorSeleccionado = Brushes.Red;
         }
     }
 }
