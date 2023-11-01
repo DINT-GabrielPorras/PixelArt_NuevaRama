@@ -21,7 +21,8 @@ namespace PixelArt
     /// </summary>
     public partial class MainWindow : Window
     {
-        Brush colorSeleccionado = Brushes.White;
+        Brush colorSeleccionado = Brushes.Black;
+        
         public MainWindow()
         {
             InitializeComponent();       
@@ -36,9 +37,12 @@ namespace PixelArt
                 for (int j = 0; j < dimension; j++)
                 {
                     Border bd = new Border();
-                    bd.BorderBrush = Brushes.Gray;
-                    bd.BorderThickness = new Thickness(1);
-                    bd.Style = (Style)this.Resources["bdRejilla"]; 
+
+                    // Propiedades definidas en estilos XAML.
+                    // bd.BorderBrush = Brushes.Gray;
+                    // bd.BorderThickness = new Thickness(1);
+
+                    bd.Style = (Style)this.Resources["bdRejilla"]; // Estilo definido en XAML.
                     rejilla.Children.Add(bd);
                 }
             }
@@ -49,7 +53,7 @@ namespace PixelArt
             ((Border)sender).Background = colorSeleccionado;
         }      
 
-        private void celda_Enter (object sender, EventArgs e)
+        private void celda_MouseEnter (object sender, EventArgs e)
         {
             if (System.Windows.Input.Mouse.LeftButton==MouseButtonState.Pressed)
             {
@@ -59,25 +63,58 @@ namespace PixelArt
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            EstableceTamañoRejilla(25);
+            EstableceTamañoRejilla(10);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            EstableceTamañoRejilla(50);
+            EstableceTamañoRejilla(25);
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            EstableceTamañoRejilla(75);
+            EstableceTamañoRejilla(50);
         }
 
         private void SeleccionaColor(object sender, RoutedEventArgs e)
         {
-            String color = (sender as RadioButton).Tag.ToString();
-            BrushConverter c1 = new BrushConverter();
+            RadioButton rb = (RadioButton)sender;
 
-            colorSeleccionado = (Brush)c1.ConvertFrom(color);
+            if (rb.Tag.ToString() == "Personalized")
+            {
+                // Activamos el TextBox para poner el color en hexadecimal.
+                colorPersonalizadoTextBox.IsEnabled = true;
+            }
+            else
+            {
+                // Mantenemos la caja de texto personalizada desactivada.
+                colorPersonalizadoTextBox.IsEnabled = false;
+                colorPersonalizadoTextBox.Text = "";
+
+                // Hallar el color desde cadena
+                String color = rb.Tag.ToString();
+                BrushConverter c1 = new BrushConverter();
+
+                colorSeleccionado = (Brush)c1.ConvertFrom(color);
+            }
         }
-    }
+
+        private void SeleccionaColorPersonalizado(object sender, KeyEventArgs e)
+        {
+            BrushConverter c1 = new BrushConverter();
+            TextBox t1 = (TextBox)sender;
+
+            if (e.Key == Key.Enter) // Se debe de pulsar ENTER.
+            {
+                try 
+                { 
+                colorSeleccionado = (Brush)c1.ConvertFrom(t1.Text);
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("El color introducido no es válido");
+                }
+            }
+        }
+     }
 }

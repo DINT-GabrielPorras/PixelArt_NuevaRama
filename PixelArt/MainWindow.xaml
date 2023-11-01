@@ -16,9 +16,19 @@
             <Setter Property="Margin" Value="3"/>
             <EventSetter Event="Checked" Handler="SeleccionaColor"/>
         </Style>
+        
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Margin" Value="3"/>
+            <EventSetter Event="KeyDown" Handler="SeleccionaColorPersonalizado"/>
+        </Style>
+
         <Style TargetType="{x:Type Border}" x:Key="bdRejilla">
             <EventSetter Event="MouseLeftButtonDown"  Handler="celda_MouseLeftButtonDown"/>
-            <EventSetter Event="MouseEnter" Handler="celda_Enter"/>
+            <EventSetter Event="MouseEnter" Handler="celda_MouseEnter"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="0.5"/>
         </Style>
     </Window.Resources>
     
@@ -36,7 +46,7 @@
         <StackPanel DockPanel.Dock="Right" Margin="20">
             <GroupBox Header="Colores" Padding="0,10">
                 <StackPanel>
-                    <RadioButton Content="Negro" Tag="Black"/>
+                    <RadioButton Content="Negro" Tag="Black" IsChecked="True"/>
                     <RadioButton Content="Blanco" Tag="White"/>
                     <RadioButton Content="Rojo" Tag="Red"/>
                     <RadioButton Content="Verde" Tag="Green"/>
@@ -45,15 +55,15 @@
                     <RadioButton Content="Naranja" Tag="Orange"/>
                     <RadioButton Content="Rosa" Tag="Pink"/>
                     <RadioButton Content="Personalizado" Tag="Personalized"/>
-                    <TextBox Text="" Margin="3"/>
+                    <TextBox x:Name="colorPersonalizadoTextBox" Text="" IsEnabled="False"/>  <!-- Se activa cuando pulsamos "Personalizado" -->
                 </StackPanel>
             </GroupBox>
             <Button Content="Rellenar"/>
         </StackPanel>
 
-        <Border BorderBrush="Black" BorderThickness="3">
-            <UniformGrid x:Name="rejilla" Margin="0,-3,0,-3">
-                
+        <Border BorderBrush="Black" BorderThickness="3" Margin="20">
+            <UniformGrid x:Name="rejilla">
+              <!-- Las celdas que se añaden al panel se realiza de forma dinámica desde C# -->   
             </UniformGrid>
         </Border>
     </DockPanel>
