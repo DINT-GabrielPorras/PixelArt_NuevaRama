@@ -34,11 +34,11 @@
     
     <DockPanel LastChildFill="True">
         <StackPanel DockPanel.Dock="Left" Margin="20">
-            <GroupBox Header="Nuevo" >
+            <GroupBox Header="Tamaño" >
                 <StackPanel>
-                    <Button Content="Pequeño" Click="Button_Click"/>
-                    <Button Content="Mediano" Click="Button_Click_1"/>
-                    <Button Content="Grande" Click="Button_Click_2"/>
+                    <Button Content="Pequeño" Click="EstableceTamañoRejilla_Click" Tag="Small"/>
+                    <Button Content="Mediano" Click="EstableceTamañoRejilla_Click" Tag="Middle"/>
+                    <Button Content="Grande" Click="EstableceTamañoRejilla_Click" Tag="Big"/>
                 </StackPanel>
             </GroupBox>
         </StackPanel>
@@ -55,15 +55,15 @@
                     <RadioButton Content="Naranja" Tag="Orange"/>
                     <RadioButton Content="Rosa" Tag="Pink"/>
                     <RadioButton Content="Personalizado" Tag="Personalized"/>
-                    <TextBox x:Name="colorPersonalizadoTextBox" Text="" IsEnabled="False"/>  <!-- Se activa cuando pulsamos "Personalizado" -->
+                    <TextBox x:Name="colorPersonalizadoTextBox" Text="" IsEnabled="False"/>
                 </StackPanel>
             </GroupBox>
-            <Button Content="Rellenar"/>
+            <Button Content="Rellenar" Click="PintaRejilla_Click"/>
         </StackPanel>
 
         <Border BorderBrush="Black" BorderThickness="3" Margin="20">
             <UniformGrid x:Name="rejilla">
-              <!-- Las celdas que se añaden al panel se realiza de forma dinámica desde C# -->   
+                 
             </UniformGrid>
         </Border>
     </DockPanel>
